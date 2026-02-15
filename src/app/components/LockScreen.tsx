@@ -145,12 +145,12 @@ export function LockScreen() {
   }
 
   return (
-    <div className="min-h-svh overflow-y-auto pt-5 pb-3 px-4 bg-gradient-to-br from-black via-gray-950 to-black flex flex-col items-center justify-start">
+    <div className="min-h-svh overflow-y-auto pt-[calc(env(safe-area-inset-top)+28px)] pb-[calc(env(safe-area-inset-bottom)+16px)] px-4 bg-gradient-to-br from-black via-gray-950 to-black flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
+        className="w-full max-w-[420px]"
       >
         {/* Logo Banner — ~5mm du haut (pt-5), espace minimal avant sous-titre (gap-1) */}
         <motion.div
@@ -159,12 +159,14 @@ export function LockScreen() {
           transition={{ delay: 0.2 }}
           className="text-center mb-2 flex flex-col items-center gap-1"
         >
-          <div className="pointer-events-none select-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
-            <KazoomBanner variant="hero" className="max-h-[160px] max-w-[760px]" />
-          </div>
-          <div className="flex items-center justify-center gap-2 text-indigo-400">
-            <Shield className="w-4 h-4" />
-            <p className="text-xs font-medium">Messagerie Sécurisée</p>
+          <div className="-translate-y-5 flex flex-col items-center gap-1">
+            <div className="pointer-events-none select-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <KazoomBanner variant="hero" className="max-h-[140px] max-w-[720px]" />
+            </div>
+            <div className="flex items-center justify-center gap-2 text-indigo-400">
+              <Shield className="w-5 h-5" />
+              <p className="text-sm font-semibold">Messagerie Sécurisée</p>
+            </div>
           </div>
         </motion.div>
 
@@ -226,7 +228,7 @@ export function LockScreen() {
           </form>
 
           {/* Tentatives restantes */}
-          <div className="mt-4 pt-4 border-t border-gray-700">
+          <div className="mt-3 pt-3 border-t border-gray-700">
             <div className="flex items-center justify-between">
               <span className="text-gray-400 text-xs">Tentatives restantes</span>
               <div className="flex gap-1">
@@ -253,8 +255,8 @@ export function LockScreen() {
                 : 'Effacement des données en cours...'}
             </p>
 
-            {/* Plateau Wipe — bouton à droite, slider/confirmation dans le même plateau */}
-            <div className="mt-3 rounded-xl border border-red-600/30 bg-red-950/10 p-3">
+            {/* Plateau Wipe — bouton pleine largeur, slider/confirmation dans le même plateau */}
+            <div className="mt-5 rounded-xl border border-red-600/30 bg-red-950/10 p-3">
               <AnimatePresence mode="wait">
                 {!wipeMode ? (
                   <motion.div
@@ -262,7 +264,7 @@ export function LockScreen() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center justify-end"
+                    className="flex items-center"
                   >
                     <motion.button
                       type="button"
@@ -271,9 +273,9 @@ export function LockScreen() {
                         setSwipeCount(0);
                         setDragX(0);
                       }}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-red-600/20 border border-red-600/50 hover:bg-red-600/30 text-red-300 text-xs rounded-lg transition-colors"
+                      className="flex items-center justify-center gap-2 w-full h-12 bg-red-600/20 border border-red-600/50 hover:bg-red-600/30 text-red-300 text-sm rounded-lg transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-5 h-5" />
                       Wipe
                     </motion.button>
                   </motion.div>
