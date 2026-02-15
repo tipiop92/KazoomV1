@@ -152,14 +152,14 @@ export function LockScreen() {
         transition={{ duration: 0.6 }}
         className="w-full max-w-md"
       >
-        {/* Logo Banner — ~5mm du haut (pt-5), ~5mm avant sous-titre (gap-2) */}
+        {/* Logo Banner — ~5mm du haut (pt-5), espace minimal avant sous-titre (gap-1) */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-center mb-6 flex flex-col items-center gap-2"
+          className="text-center mb-6 flex flex-col items-center gap-1"
         >
-          <KazoomBanner variant="header" className="max-h-[88px] max-w-[640px]" to="/" />
+          <KazoomBanner variant="hero" className="max-h-[140px] max-w-[720px]" />
           <div className="flex items-center justify-center gap-2 text-indigo-400">
             <Shield className="w-4 h-4" />
             <p className="text-xs font-medium">Messagerie Sécurisée</p>
