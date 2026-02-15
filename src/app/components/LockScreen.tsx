@@ -145,7 +145,7 @@ export function LockScreen() {
   }
 
   return (
-    <div className="min-h-dvh overflow-y-auto pt-5 pb-3 px-4 bg-gradient-to-br from-black via-gray-950 to-black flex items-center justify-center">
+    <div className="min-h-svh overflow-y-auto pt-5 pb-3 px-4 bg-gradient-to-br from-black via-gray-950 to-black flex flex-col items-center justify-start">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -157,9 +157,11 @@ export function LockScreen() {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-center mb-6 flex flex-col items-center gap-1"
+          className="text-center mb-2 flex flex-col items-center gap-1"
         >
-          <KazoomBanner variant="hero" className="max-h-[160px] max-w-[760px]" />
+          <div className="pointer-events-none select-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+            <KazoomBanner variant="hero" className="max-h-[160px] max-w-[760px]" />
+          </div>
           <div className="flex items-center justify-center gap-2 text-indigo-400">
             <Shield className="w-4 h-4" />
             <p className="text-xs font-medium">Messagerie Sécurisée</p>
@@ -171,9 +173,9 @@ export function LockScreen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-5 shadow-2xl"
+          className="bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-4 shadow-2xl"
         >
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-center mb-2">
             <div className="bg-indigo-600/20 p-3 rounded-full">
               <Lock className="w-6 h-6 text-indigo-400" />
             </div>
@@ -182,7 +184,7 @@ export function LockScreen() {
           <h2 className="text-xl font-bold text-white text-center mb-1">
             Déverrouillage
           </h2>
-          <p className="text-gray-400 text-sm text-center mb-4">
+          <p className="text-gray-400 text-sm text-center mb-2">
             Entrez votre mot de passe pour accéder
           </p>
 
@@ -332,11 +334,6 @@ export function LockScreen() {
               </AnimatePresence>
             </div>
 
-            {import.meta.env.DEV && (
-              <p className="text-gray-500 text-xs mt-2 text-center">
-                💡 Démo: utilisez "{CORRECT_PASSWORD}" comme mot de passe
-              </p>
-            )}
           </div>
         </motion.div>
       </motion.div>

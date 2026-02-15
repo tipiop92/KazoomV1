@@ -20,9 +20,6 @@ interface KazoomBannerProps {
   onClick?: () => void;
 }
 
-const interactiveImgClasses = "cursor-pointer pointer-events-auto select-none";
-const nonInteractiveImgClasses = "cursor-default pointer-events-none select-none";
-
 export function KazoomBanner({
   variant = "header",
   className,
@@ -33,13 +30,22 @@ export function KazoomBanner({
   const base = variantClasses[variant];
   const classes = className ? `${base} ${className}`.trim() : base;
   const isInteractive = to != null || onClick != null;
+  const imgClasses = isInteractive
+    ? "cursor-pointer pointer-events-auto select-none"
+    : "cursor-default pointer-events-none select-none";
   const isHeroLarge = variant === "heroLarge";
+  const noTapNoDragStyle = {
+    WebkitTapHighlightColor: "transparent",
+    WebkitUserDrag: "none",
+  } as const;
+  const imgStyle = isHeroLarge ? { ...heroLargeStyle, ...noTapNoDragStyle } : noTapNoDragStyle;
   const img = (
     <img
       src={bannerSrc}
       alt={alt}
-      className={`${classes} ${isInteractive ? interactiveImgClasses : nonInteractiveImgClasses}`}
-      style={isHeroLarge ? heroLargeStyle : undefined}
+      draggable={false}
+      className={`${classes} ${imgClasses}`}
+      style={imgStyle}
     />
   );
 
