@@ -10,22 +10,19 @@ node_modules/
 dist/
 *.log
 
-# Archives / gros fichiers
+# Archives / binaires
 *.zip
 *.7z
 *.rar
+*.apk
+*.aab
 
 # Capacitor / Android
 android/.gradle/
 android/**/build/
-android/capacitor-cordova-android-plugins/
-android/app/release/
-android/app/debug/
-
-# Android secrets / local config
 local.properties
 *.jks
 *.keystore
-*.apk
-*.aab
-node_modules
+
+# Plugins générés (optionnel)
+android/capacitor-cordova-android-plugins/
