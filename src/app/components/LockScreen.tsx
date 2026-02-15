@@ -112,15 +112,15 @@ export function LockScreen() {
 
   if (isLocked) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-black flex items-center justify-center p-4">
+      <div className="min-h-dvh overflow-y-auto py-3 px-4 bg-gradient-to-br from-black via-gray-950 to-black flex items-center justify-center">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           className="text-center"
         >
-          <AlertTriangle className="w-24 h-24 text-red-500 mx-auto mb-6" />
-          <h1 className="text-3xl font-bold text-red-500 mb-4">APPAREIL VERROUILLÉ</h1>
-          <p className="text-gray-400 text-lg mb-8">
+          <AlertTriangle className="w-20 h-20 text-red-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-red-500 mb-3">APPAREIL VERROUILLÉ</h1>
+          <p className="text-gray-400 text-sm mb-6">
             Trop de tentatives incorrectes.<br />
             Toutes les données ont été effacées.
           </p>
@@ -145,48 +145,48 @@ export function LockScreen() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-black flex items-center justify-center p-4">
+    <div className="min-h-dvh overflow-y-auto py-3 px-4 bg-gradient-to-br from-black via-gray-950 to-black flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="w-full max-w-md"
       >
-        {/* Logo Banner */}
+        {/* Logo Banner — hauteur réduite, rapproché du sous-titre */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-center mb-12"
+          className="text-center mb-6"
         >
-          <KazoomBanner variant="heroLarge" className="mb-6" to="/" />
-          <div className="flex items-center justify-center gap-2 text-indigo-400">
-            <Shield className="w-5 h-5" />
-            <p className="text-sm font-medium">Messagerie Sécurisée</p>
+          <KazoomBanner variant="header" className="mb-1 max-h-12" to="/" />
+          <div className="flex items-center justify-center gap-2 text-indigo-400 mt-1">
+            <Shield className="w-4 h-4" />
+            <p className="text-xs font-medium">Messagerie Sécurisée</p>
           </div>
         </motion.div>
 
-        {/* Lock Screen Card */}
+        {/* Lock Screen Card — padding et espacements réduits */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-8 shadow-2xl"
+          className="bg-gray-800/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-5 shadow-2xl"
         >
-          <div className="flex items-center justify-center mb-6">
-            <div className="bg-indigo-600/20 p-4 rounded-full">
-              <Lock className="w-8 h-8 text-indigo-400" />
+          <div className="flex items-center justify-center mb-4">
+            <div className="bg-indigo-600/20 p-3 rounded-full">
+              <Lock className="w-6 h-6 text-indigo-400" />
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-white text-center mb-2">
+          <h2 className="text-xl font-bold text-white text-center mb-1">
             Déverrouillage
           </h2>
-          <p className="text-gray-400 text-center mb-8">
+          <p className="text-gray-400 text-sm text-center mb-4">
             Entrez votre mot de passe pour accéder
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <motion.div
               animate={isShaking ? {
                 x: [0, -10, 10, -10, 10, 0],
@@ -224,9 +224,9 @@ export function LockScreen() {
           </form>
 
           {/* Tentatives restantes */}
-          <div className="mt-6 pt-6 border-t border-gray-700">
+          <div className="mt-4 pt-4 border-t border-gray-700">
             <div className="flex items-center justify-between">
-              <span className="text-gray-400 text-sm">Tentatives restantes</span>
+              <span className="text-gray-400 text-xs">Tentatives restantes</span>
               <div className="flex gap-1">
                 {Array.from({ length: MAX_ATTEMPTS }).map((_, i) => (
                   <motion.div
@@ -243,7 +243,7 @@ export function LockScreen() {
                 ))}
               </div>
             </div>
-            <p className="text-gray-500 text-xs mt-2 text-center">
+            <p className="text-gray-500 text-xs mt-1 text-center">
               {remainingAttempts === MAX_ATTEMPTS 
                 ? `${MAX_ATTEMPTS} tentatives avant l'effacement des données`
                 : remainingAttempts > 0
@@ -251,43 +251,42 @@ export function LockScreen() {
                 : 'Effacement des données en cours...'}
             </p>
 
-            {/* Palette Wipe (sous le décompte) */}
-            <div className="mt-4 rounded-xl border border-red-600/30 bg-red-950/10 p-3">
-              <div className="flex items-center gap-2 text-red-400/90 text-xs mb-2">
-                <Trash2 className="w-4 h-4" />
-                <span>Wipe</span>
-                <span className="text-gray-500">2 swipes</span>
-              </div>
+            {/* Plateau Wipe — bouton à droite, slider/confirmation dans le même plateau */}
+            <div className="mt-3 rounded-xl border border-red-600/30 bg-red-950/10 p-3">
               <AnimatePresence mode="wait">
                 {!wipeMode ? (
-                  <motion.button
-                    key="wipe-button"
-                    type="button"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    onClick={() => {
-                      setWipeMode(true);
-                      setSwipeCount(0);
-                      setDragX(0);
-                    }}
-                    className="w-full px-4 py-2 bg-red-600/20 border border-red-600/50 hover:bg-red-600/30 text-red-300 text-xs rounded-lg transition-colors flex items-center justify-center gap-2"
+                  <motion.div
+                    key="wipe-row"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center justify-end"
                   >
-                    <Trash2 className="w-4 h-4" />
-                    Wipe
-                  </motion.button>
+                    <motion.button
+                      type="button"
+                      onClick={() => {
+                        setWipeMode(true);
+                        setSwipeCount(0);
+                        setDragX(0);
+                      }}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-red-600/20 border border-red-600/50 hover:bg-red-600/30 text-red-300 text-xs rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Wipe
+                    </motion.button>
+                  </motion.div>
                 ) : (
                   <motion.div
                     key="wipe-swipe"
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
+                    exit={{ opacity: 0, y: -4 }}
                     className="space-y-2"
                   >
                     <p className="text-red-400 text-xs font-semibold text-center">
                       {swipeCount === 0 ? 'Glissez pour confirmer (1/2)' : 'Glissez à nouveau (2/2)'}
                     </p>
-                    <div className="relative bg-gray-800/50 border border-red-600/50 rounded-full h-12 overflow-hidden">
+                    <div className="relative bg-gray-800/50 border border-red-600/50 rounded-full h-10 overflow-hidden">
                       <motion.div
                         drag="x"
                         dragConstraints={{ left: 0, right: 0 }}
@@ -308,10 +307,10 @@ export function LockScreen() {
                         }}
                         animate={{ x: dragX }}
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        className="absolute left-0 top-0 h-12 w-12 bg-gradient-to-r from-red-600 to-red-700 rounded-full cursor-grab active:cursor-grabbing flex items-center justify-center shadow-lg"
+                        className="absolute left-0 top-0 h-10 w-10 bg-gradient-to-r from-red-600 to-red-700 rounded-full cursor-grab active:cursor-grabbing flex items-center justify-center shadow-lg"
                         style={{ touchAction: 'none' }}
                       >
-                        <ChevronRight className="w-6 h-6 text-white" />
+                        <ChevronRight className="w-5 h-5 text-white" />
                       </motion.div>
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <span className="text-red-400 text-xs font-medium">Glissez pour effacer</span>
@@ -333,9 +332,11 @@ export function LockScreen() {
               </AnimatePresence>
             </div>
 
-            <p className="text-gray-500 text-xs mt-3 text-center">
-              💡 Démo: utilisez "{CORRECT_PASSWORD}" comme mot de passe
-            </p>
+            {import.meta.env.DEV && (
+              <p className="text-gray-500 text-xs mt-2 text-center">
+                💡 Démo: utilisez "{CORRECT_PASSWORD}" comme mot de passe
+              </p>
+            )}
           </div>
         </motion.div>
       </motion.div>
