@@ -159,7 +159,7 @@ export function LockScreen() {
           transition={{ delay: 0.2 }}
           className="text-center mb-6 flex flex-col items-center gap-1"
         >
-          <KazoomBanner variant="hero" className="max-h-[140px] max-w-[720px]" />
+          <KazoomBanner variant="hero" className="max-h-[160px] max-w-[760px]" />
           <div className="flex items-center justify-center gap-2 text-indigo-400">
             <Shield className="w-4 h-4" />
             <p className="text-xs font-medium">Messagerie Sécurisée</p>
